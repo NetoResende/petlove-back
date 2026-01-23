@@ -177,7 +177,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/raimundo-gomes/Documentos/CURSO_JavaScript_Gleydson_Teixera/projeto-petlove/petlove-back/src/generated/prisma",
+      "value": "C:\\Users\\ander\\OneDrive\\Documentos\\1 - Reforço Dev\\petlove-back-1\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -186,12 +186,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/raimundo-gomes/Documentos/CURSO_JavaScript_Gleydson_Teixera/projeto-petlove/petlove-back/prisma/schema.prisma",
+    "sourceFilePath": "C:\\Users\\ander\\OneDrive\\Documentos\\1 - Reforço Dev\\petlove-back-1\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
