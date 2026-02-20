@@ -1,0 +1,1213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Petlove API",
+    "description": "Description",
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/concorrentes/": {
+      "get": {
+        "tags": [
+          "Concorrentes"
+        ],
+        "description": "Endpoint para buscar todos os concorrentes.",
+        "responses": {
+          "200": {
+            "description": "Lista de concorrentes encontrada com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "Petz"
+                  },
+                  "tipo": {
+                    "type": "string",
+                    "example": "Petshop"
+                  },
+                  "endereco": {
+                    "type": "string",
+                    "example": "Rua Exemplo, 123"
+                  },
+                  "foto": {
+                    "type": "string",
+                    "example": "http://localhost:8000/uploads/concorrentes/foto.jpg"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Concorrentes"
+        ],
+        "description": "Endpoint para criar um novo concorrente.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "foto",
+            "in": "formData",
+            "type": "file",
+            "description": "Foto do concorrente."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "foto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Concorrente criado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Concorrente criado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/concorrentes/{id}": {
+      "get": {
+        "tags": [
+          "Concorrentes"
+        ],
+        "description": "Endpoint para buscar um concorrente pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Concorrente encontrado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Petz"
+                },
+                "tipo": {
+                  "type": "string",
+                  "example": "Petshop"
+                },
+                "endereco": {
+                  "type": "string",
+                  "example": "Rua Exemplo, 123"
+                },
+                "foto": {
+                  "type": "string",
+                  "example": "http://localhost:8000/uploads/concorrentes/foto.jpg"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Concorrentes"
+        ],
+        "description": "Endpoint para editar um concorrente existente.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "foto",
+            "in": "formData",
+            "type": "file",
+            "description": "Foto do concorrente."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "foto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Concorrente editado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Concorrente atualizado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Concorrentes"
+        ],
+        "description": "Endpoint para deletar um concorrente pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Concorrente deletado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Concorrente deletado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para buscar todos os usuários.",
+        "responses": {
+          "200": {
+            "description": "Lista de usuários encontrada com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "Nome do Usuário"
+                  },
+                  "email": {
+                    "type": "string",
+                    "example": "email@teste.com"
+                  },
+                  "senha": {
+                    "type": "string",
+                    "example": "hash_da_senha"
+                  },
+                  "foto": {
+                    "type": "string",
+                    "example": "http://localhost:8000/uploads/usuarios/foto.jpg"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para criar um novo usuário.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "formData",
+            "type": "string",
+            "description": "Nome do usuário."
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "description": "Email do usuário."
+          },
+          {
+            "name": "senha",
+            "in": "formData",
+            "type": "string",
+            "description": "Senha do usuário."
+          },
+          {
+            "name": "foto",
+            "in": "formData",
+            "type": "file",
+            "description": "Foto do usuário."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "foto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário criado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Usuario criado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para buscar um usuário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário encontrado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Nome do Usuário"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "email@teste.com"
+                },
+                "senha": {
+                  "type": "string",
+                  "example": "hash_da_senha"
+                },
+                "foto": {
+                  "type": "string",
+                  "example": "http://localhost:8000/uploads/usuarios/foto.jpg"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para editar um usuário existente.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "in": "formData",
+            "type": "string",
+            "description": "Nome do usuário."
+          },
+          {
+            "name": "email",
+            "in": "formData",
+            "type": "string",
+            "description": "Email do usuário."
+          },
+          {
+            "name": "senha",
+            "in": "formData",
+            "type": "string",
+            "description": "Senha do usuário."
+          },
+          {
+            "name": "foto",
+            "in": "formData",
+            "type": "file",
+            "description": "Foto do usuário."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "example": "any"
+                },
+                "foto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário editado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Usuario atualizado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Usuarios"
+        ],
+        "description": "Endpoint para deletar um usuário pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário deletado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Usuario deletado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/": {
+      "get": {
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para buscar todos os produtos.",
+        "responses": {
+          "200": {
+            "description": "Lista de produtos encontrada com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "nome": {
+                    "type": "string",
+                    "example": "Nome do Produto"
+                  },
+                  "preco": {
+                    "type": "number",
+                    "example": 10.5
+                  },
+                  "codigo": {
+                    "type": "string",
+                    "example": "COD123"
+                  },
+                  "foto": {
+                    "type": "string",
+                    "example": "http://localhost:8000/uploads/produtos/foto.jpg"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para criar um novo produto.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "nome",
+            "in": "formData",
+            "type": "string",
+            "description": "Nome do produto."
+          },
+          {
+            "name": "preco",
+            "in": "formData",
+            "type": "number",
+            "description": "Preço do produto."
+          },
+          {
+            "name": "codigo",
+            "in": "formData",
+            "type": "string",
+            "description": "Código do produto."
+          },
+          {
+            "name": "foto",
+            "in": "formData",
+            "type": "file",
+            "description": "Foto do produto."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "preco": {
+                  "example": "any"
+                },
+                "foto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto criado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Produto criado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/produtos/{id}": {
+      "get": {
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para buscar um produto pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto encontrado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "nome": {
+                  "type": "string",
+                  "example": "Nome do Produto"
+                },
+                "preco": {
+                  "type": "number",
+                  "example": 10.5
+                },
+                "codigo": {
+                  "type": "string",
+                  "example": "COD123"
+                },
+                "foto": {
+                  "type": "string",
+                  "example": "http://localhost:8000/uploads/produtos/foto.jpg"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para editar um produto existente.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nome",
+            "in": "formData",
+            "type": "string",
+            "description": "Nome do produto."
+          },
+          {
+            "name": "preco",
+            "in": "formData",
+            "type": "number",
+            "description": "Preço do produto."
+          },
+          {
+            "name": "codigo",
+            "in": "formData",
+            "type": "string",
+            "description": "Código do produto."
+          },
+          {
+            "name": "foto",
+            "in": "formData",
+            "type": "file",
+            "description": "Foto do produto."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "preco": {
+                  "example": "any"
+                },
+                "id": {
+                  "example": "any"
+                },
+                "foto": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto editado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Produto atualizado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Produtos"
+        ],
+        "description": "Endpoint para deletar um produto pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto deletado com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Produto deletado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/missoes/": {
+      "get": {
+        "tags": [
+          "Missoes"
+        ],
+        "description": "Endpoint para buscar todas as missões.",
+        "responses": {
+          "200": {
+            "description": "Lista de missões encontrada com sucesso.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "concorrente_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Ativo"
+                  },
+                  "usuario_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "example": "2023-10-27T10:00:00.000Z"
+                  },
+                  "concorrentes": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "nome": {
+                        "type": "string",
+                        "example": "Petz"
+                      },
+                      "tipo": {
+                        "type": "string",
+                        "example": "Petshop"
+                      },
+                      "endereco": {
+                        "type": "string",
+                        "example": "Rua Exemplo, 123"
+                      },
+                      "foto": {
+                        "type": "string",
+                        "example": "http://localhost:8000/uploads/concorrentes/foto.jpg"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2023-10-27T10:00:00.000Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2023-10-27T10:00:00.000Z"
+                      }
+                    }
+                  },
+                  "missao_produto": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "missao_id": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "produto_id": {
+                          "type": "number",
+                          "example": 1
+                        },
+                        "preco": {
+                          "type": "number",
+                          "example": 10.5
+                        },
+                        "observacoes": {
+                          "type": "string",
+                          "example": "Obs"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "Disponivel"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "example": "2023-10-27T10:00:00.000Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "example": "2023-10-27T10:00:00.000Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Missoes"
+        ],
+        "description": "Endpoint para criar uma nova missão via upload de arquivo.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "name": "concorrente_id",
+            "in": "formData",
+            "type": "integer",
+            "description": "ID do concorrente associado."
+          },
+          {
+            "name": "arquivo",
+            "in": "formData",
+            "type": "file",
+            "description": "Arquivo Excel da missão."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "concorrente_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Missão criada com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/missoes/{id}": {
+      "get": {
+        "tags": [
+          "Missoes"
+        ],
+        "description": "Endpoint para buscar uma missão pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Missão encontrada com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "concorrente_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Ativo"
+                },
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "createdAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "example": "2023-10-27T10:00:00.000Z"
+                },
+                "concorrentes": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "nome": {
+                      "type": "string",
+                      "example": "Petz"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "example": "Petshop"
+                    },
+                    "endereco": {
+                      "type": "string",
+                      "example": "Rua Exemplo, 123"
+                    },
+                    "foto": {
+                      "type": "string",
+                      "example": "http://localhost:8000/uploads/concorrentes/foto.jpg"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "example": "2023-10-27T10:00:00.000Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "example": "2023-10-27T10:00:00.000Z"
+                    }
+                  }
+                },
+                "missao_produto": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "missao_id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "produto_id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "preco": {
+                        "type": "number",
+                        "example": 10.5
+                      },
+                      "observacoes": {
+                        "type": "string",
+                        "example": "Obs"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "Disponivel"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2023-10-27T10:00:00.000Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2023-10-27T10:00:00.000Z"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Missoes"
+        ],
+        "description": "Endpoint para deletar uma missão pelo ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Missão deletada com sucesso.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Missão deletado com sucesso"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
