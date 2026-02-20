@@ -7,7 +7,21 @@ async function buscar() {
         return await prisma.missoes.findMany({
             include: {
                 concorrentes: true,
-                missao_produto: true
+                missao_produto: {
+
+                    orderBy: {
+                        produtos: {
+                            id: "asc"
+                        }
+                    },
+                    include: {
+                        produtos: true // Apenas inclui os dados do produto
+                    }
+
+                }
+            },
+            orderBy: {
+                id: "asc"
             }
         })
     } catch (error) {
@@ -26,9 +40,9 @@ async function buscarPorId(id) {
             },
             include: {
                 concorrentes: true,
-                missao_missãos: {
+                missao_produto: {
                     include: {
-                        missãos: true
+                        produtos: true
                     }
                 }
             }
@@ -58,7 +72,7 @@ async function criar(req, res) {
             });
         }
 
-        const { concorrente_id } = req.body;
+        const { Produto_id } = req.body;
         const caminho = req.file.path;
 
         const workbook = XLSX.readFile(caminho);
@@ -117,7 +131,7 @@ async function criar(req, res) {
             // 2️⃣ Cria a missão APÓS produtos existirem
             await tx.missoes.create({
                 data: {
-                    concorrente_id: Number(concorrente_id),
+                    Produto_id: Number(Produto_id),
                     missao_produto: {
                         create: produtosCriados.map(p => ({
                             produto_id: p.id
@@ -166,9 +180,35 @@ async function deletar(id) {
     }
 }
 
+async function coletar(dados) {
+
+    try {
+        const request = await prisma.missao_produto.update({
+            data: dados,
+            where: { id: Number(dados.id) }
+        });
+        if (request) {
+            return {
+                type: "success",
+                description: "Produto atualizado com sucesso",
+            };
+        }
+        return {
+            type: "error",
+            description: "não foi possível atualizar o Produto"
+        }
+    } catch (error) {
+        return {
+            type: "error",
+            description: error.message
+        }
+    }
+}
 export {
     buscar,
     buscarPorId,
     criar,
-    deletar
+    deletar,
+    coletar
+
 }

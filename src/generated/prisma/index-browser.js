@@ -136,6 +136,7 @@ exports.Prisma.Missao_produtoScalarFieldEnum = {
   missao_id: 'missao_id',
   produto_id: 'produto_id',
   preco: 'preco',
+  preco_desconto: 'preco_desconto',
   observacoes: 'observacoes',
   status: 'status',
   createdAt: 'createdAt',
@@ -167,6 +168,14 @@ exports.Prisma.UsuariosScalarFieldEnum = {
   email: 'email',
   senha: 'senha',
   foto: 'foto',
+  nivel_id: 'nivel_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NiveisScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -192,7 +201,8 @@ exports.Prisma.ModelName = {
   missao_produto: 'missao_produto',
   missoes: 'missoes',
   produtos: 'produtos',
-  usuarios: 'usuarios'
+  usuarios: 'usuarios',
+  niveis: 'niveis'
 };
 
 /**

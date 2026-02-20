@@ -38,6 +38,11 @@ export type produtos = $Result.DefaultSelection<Prisma.$produtosPayload>
  * 
  */
 export type usuarios = $Result.DefaultSelection<Prisma.$usuariosPayload>
+/**
+ * Model niveis
+ * 
+ */
+export type niveis = $Result.DefaultSelection<Prisma.$niveisPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -206,6 +211,16 @@ export class PrismaClient<
     * ```
     */
   get usuarios(): Prisma.usuariosDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.niveis`: Exposes CRUD operations for the **niveis** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Niveis
+    * const niveis = await prisma.niveis.findMany()
+    * ```
+    */
+  get niveis(): Prisma.niveisDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -651,7 +666,8 @@ export namespace Prisma {
     missao_produto: 'missao_produto',
     missoes: 'missoes',
     produtos: 'produtos',
-    usuarios: 'usuarios'
+    usuarios: 'usuarios',
+    niveis: 'niveis'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -670,7 +686,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "concorrentes" | "missao_produto" | "missoes" | "produtos" | "usuarios"
+      modelProps: "concorrentes" | "missao_produto" | "missoes" | "produtos" | "usuarios" | "niveis"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1044,6 +1060,80 @@ export namespace Prisma {
           }
         }
       }
+      niveis: {
+        payload: Prisma.$niveisPayload<ExtArgs>
+        fields: Prisma.niveisFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.niveisFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.niveisFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>
+          }
+          findFirst: {
+            args: Prisma.niveisFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.niveisFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>
+          }
+          findMany: {
+            args: Prisma.niveisFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>[]
+          }
+          create: {
+            args: Prisma.niveisCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>
+          }
+          createMany: {
+            args: Prisma.niveisCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.niveisCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>[]
+          }
+          delete: {
+            args: Prisma.niveisDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>
+          }
+          update: {
+            args: Prisma.niveisUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>
+          }
+          deleteMany: {
+            args: Prisma.niveisDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.niveisUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.niveisUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>[]
+          }
+          upsert: {
+            args: Prisma.niveisUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$niveisPayload>
+          }
+          aggregate: {
+            args: Prisma.NiveisAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNiveis>
+          }
+          groupBy: {
+            args: Prisma.niveisGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NiveisGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.niveisCountArgs<ExtArgs>
+            result: $Utils.Optional<NiveisCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1145,6 +1235,7 @@ export namespace Prisma {
     missoes?: missoesOmit
     produtos?: produtosOmit
     usuarios?: usuariosOmit
+    niveis?: niveisOmit
   }
 
   /* Types for Logging */
@@ -1341,6 +1432,37 @@ export namespace Prisma {
    */
   export type UsuariosCountOutputTypeCountMissoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: missoesWhereInput
+  }
+
+
+  /**
+   * Count Type NiveisCountOutputType
+   */
+
+  export type NiveisCountOutputType = {
+    usuario: number
+  }
+
+  export type NiveisCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | NiveisCountOutputTypeCountUsuarioArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * NiveisCountOutputType without action
+   */
+  export type NiveisCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the NiveisCountOutputType
+     */
+    select?: NiveisCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * NiveisCountOutputType without action
+   */
+  export type NiveisCountOutputTypeCountUsuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: usuariosWhereInput
   }
 
 
@@ -2495,6 +2617,7 @@ export namespace Prisma {
     missao_id: number | null
     produto_id: number | null
     preco: number | null
+    preco_desconto: number | null
   }
 
   export type Missao_produtoSumAggregateOutputType = {
@@ -2502,6 +2625,7 @@ export namespace Prisma {
     missao_id: number | null
     produto_id: number | null
     preco: number | null
+    preco_desconto: number | null
   }
 
   export type Missao_produtoMinAggregateOutputType = {
@@ -2509,6 +2633,7 @@ export namespace Prisma {
     missao_id: number | null
     produto_id: number | null
     preco: number | null
+    preco_desconto: number | null
     observacoes: string | null
     status: string | null
     createdAt: Date | null
@@ -2520,6 +2645,7 @@ export namespace Prisma {
     missao_id: number | null
     produto_id: number | null
     preco: number | null
+    preco_desconto: number | null
     observacoes: string | null
     status: string | null
     createdAt: Date | null
@@ -2531,6 +2657,7 @@ export namespace Prisma {
     missao_id: number
     produto_id: number
     preco: number
+    preco_desconto: number
     observacoes: number
     status: number
     createdAt: number
@@ -2544,6 +2671,7 @@ export namespace Prisma {
     missao_id?: true
     produto_id?: true
     preco?: true
+    preco_desconto?: true
   }
 
   export type Missao_produtoSumAggregateInputType = {
@@ -2551,6 +2679,7 @@ export namespace Prisma {
     missao_id?: true
     produto_id?: true
     preco?: true
+    preco_desconto?: true
   }
 
   export type Missao_produtoMinAggregateInputType = {
@@ -2558,6 +2687,7 @@ export namespace Prisma {
     missao_id?: true
     produto_id?: true
     preco?: true
+    preco_desconto?: true
     observacoes?: true
     status?: true
     createdAt?: true
@@ -2569,6 +2699,7 @@ export namespace Prisma {
     missao_id?: true
     produto_id?: true
     preco?: true
+    preco_desconto?: true
     observacoes?: true
     status?: true
     createdAt?: true
@@ -2580,6 +2711,7 @@ export namespace Prisma {
     missao_id?: true
     produto_id?: true
     preco?: true
+    preco_desconto?: true
     observacoes?: true
     status?: true
     createdAt?: true
@@ -2678,6 +2810,7 @@ export namespace Prisma {
     missao_id: number
     produto_id: number
     preco: number | null
+    preco_desconto: number | null
     observacoes: string | null
     status: string
     createdAt: Date | null
@@ -2708,6 +2841,7 @@ export namespace Prisma {
     missao_id?: boolean
     produto_id?: boolean
     preco?: boolean
+    preco_desconto?: boolean
     observacoes?: boolean
     status?: boolean
     createdAt?: boolean
@@ -2721,6 +2855,7 @@ export namespace Prisma {
     missao_id?: boolean
     produto_id?: boolean
     preco?: boolean
+    preco_desconto?: boolean
     observacoes?: boolean
     status?: boolean
     createdAt?: boolean
@@ -2734,6 +2869,7 @@ export namespace Prisma {
     missao_id?: boolean
     produto_id?: boolean
     preco?: boolean
+    preco_desconto?: boolean
     observacoes?: boolean
     status?: boolean
     createdAt?: boolean
@@ -2747,13 +2883,14 @@ export namespace Prisma {
     missao_id?: boolean
     produto_id?: boolean
     preco?: boolean
+    preco_desconto?: boolean
     observacoes?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type missao_produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "missao_id" | "produto_id" | "preco" | "observacoes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["missao_produto"]>
+  export type missao_produtoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "missao_id" | "produto_id" | "preco" | "preco_desconto" | "observacoes" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["missao_produto"]>
   export type missao_produtoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     missoes?: boolean | missoesDefaultArgs<ExtArgs>
     produtos?: boolean | produtosDefaultArgs<ExtArgs>
@@ -2778,6 +2915,7 @@ export namespace Prisma {
       missao_id: number
       produto_id: number
       preco: number | null
+      preco_desconto: number | null
       observacoes: string | null
       status: string
       createdAt: Date | null
@@ -3211,6 +3349,7 @@ export namespace Prisma {
     readonly missao_id: FieldRef<"missao_produto", 'Int'>
     readonly produto_id: FieldRef<"missao_produto", 'Int'>
     readonly preco: FieldRef<"missao_produto", 'Float'>
+    readonly preco_desconto: FieldRef<"missao_produto", 'Float'>
     readonly observacoes: FieldRef<"missao_produto", 'String'>
     readonly status: FieldRef<"missao_produto", 'String'>
     readonly createdAt: FieldRef<"missao_produto", 'DateTime'>
@@ -5947,10 +6086,12 @@ export namespace Prisma {
 
   export type UsuariosAvgAggregateOutputType = {
     id: number | null
+    nivel_id: number | null
   }
 
   export type UsuariosSumAggregateOutputType = {
     id: number | null
+    nivel_id: number | null
   }
 
   export type UsuariosMinAggregateOutputType = {
@@ -5959,6 +6100,7 @@ export namespace Prisma {
     email: string | null
     senha: string | null
     foto: string | null
+    nivel_id: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5969,6 +6111,7 @@ export namespace Prisma {
     email: string | null
     senha: string | null
     foto: string | null
+    nivel_id: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5979,6 +6122,7 @@ export namespace Prisma {
     email: number
     senha: number
     foto: number
+    nivel_id: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5987,10 +6131,12 @@ export namespace Prisma {
 
   export type UsuariosAvgAggregateInputType = {
     id?: true
+    nivel_id?: true
   }
 
   export type UsuariosSumAggregateInputType = {
     id?: true
+    nivel_id?: true
   }
 
   export type UsuariosMinAggregateInputType = {
@@ -5999,6 +6145,7 @@ export namespace Prisma {
     email?: true
     senha?: true
     foto?: true
+    nivel_id?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6009,6 +6156,7 @@ export namespace Prisma {
     email?: true
     senha?: true
     foto?: true
+    nivel_id?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6019,6 +6167,7 @@ export namespace Prisma {
     email?: true
     senha?: true
     foto?: true
+    nivel_id?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6116,6 +6265,7 @@ export namespace Prisma {
     email: string
     senha: string
     foto: string | null
+    nivel_id: number | null
     createdAt: Date | null
     updatedAt: Date | null
     _count: UsuariosCountAggregateOutputType | null
@@ -6145,9 +6295,11 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     foto?: boolean
+    nivel_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     missoes?: boolean | usuarios$missoesArgs<ExtArgs>
+    nivel?: boolean | usuarios$nivelArgs<ExtArgs>
     _count?: boolean | UsuariosCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuarios"]>
 
@@ -6157,8 +6309,10 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     foto?: boolean
+    nivel_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    nivel?: boolean | usuarios$nivelArgs<ExtArgs>
   }, ExtArgs["result"]["usuarios"]>
 
   export type usuariosSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -6167,8 +6321,10 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     foto?: boolean
+    nivel_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    nivel?: boolean | usuarios$nivelArgs<ExtArgs>
   }, ExtArgs["result"]["usuarios"]>
 
   export type usuariosSelectScalar = {
@@ -6177,22 +6333,29 @@ export namespace Prisma {
     email?: boolean
     senha?: boolean
     foto?: boolean
+    nivel_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type usuariosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "foto" | "createdAt" | "updatedAt", ExtArgs["result"]["usuarios"]>
+  export type usuariosOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "foto" | "nivel_id" | "createdAt" | "updatedAt", ExtArgs["result"]["usuarios"]>
   export type usuariosInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     missoes?: boolean | usuarios$missoesArgs<ExtArgs>
+    nivel?: boolean | usuarios$nivelArgs<ExtArgs>
     _count?: boolean | UsuariosCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type usuariosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type usuariosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type usuariosIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nivel?: boolean | usuarios$nivelArgs<ExtArgs>
+  }
+  export type usuariosIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    nivel?: boolean | usuarios$nivelArgs<ExtArgs>
+  }
 
   export type $usuariosPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "usuarios"
     objects: {
       missoes: Prisma.$missoesPayload<ExtArgs>[]
+      nivel: Prisma.$niveisPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6200,6 +6363,7 @@ export namespace Prisma {
       email: string
       senha: string
       foto: string | null
+      nivel_id: number | null
       createdAt: Date | null
       updatedAt: Date | null
     }, ExtArgs["result"]["usuarios"]>
@@ -6597,6 +6761,7 @@ export namespace Prisma {
   export interface Prisma__usuariosClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     missoes<T extends usuarios$missoesArgs<ExtArgs> = {}>(args?: Subset<T, usuarios$missoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$missoesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    nivel<T extends usuarios$nivelArgs<ExtArgs> = {}>(args?: Subset<T, usuarios$nivelArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6631,6 +6796,7 @@ export namespace Prisma {
     readonly email: FieldRef<"usuarios", 'String'>
     readonly senha: FieldRef<"usuarios", 'String'>
     readonly foto: FieldRef<"usuarios", 'String'>
+    readonly nivel_id: FieldRef<"usuarios", 'Int'>
     readonly createdAt: FieldRef<"usuarios", 'DateTime'>
     readonly updatedAt: FieldRef<"usuarios", 'DateTime'>
   }
@@ -6882,6 +7048,10 @@ export namespace Prisma {
      */
     data: usuariosCreateManyInput | usuariosCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6952,6 +7122,10 @@ export namespace Prisma {
      * Limit how many usuarios to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -7045,6 +7219,25 @@ export namespace Prisma {
   }
 
   /**
+   * usuarios.nivel
+   */
+  export type usuarios$nivelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    where?: niveisWhereInput
+  }
+
+  /**
    * usuarios without action
    */
   export type usuariosDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7060,6 +7253,1097 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: usuariosInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model niveis
+   */
+
+  export type AggregateNiveis = {
+    _count: NiveisCountAggregateOutputType | null
+    _avg: NiveisAvgAggregateOutputType | null
+    _sum: NiveisSumAggregateOutputType | null
+    _min: NiveisMinAggregateOutputType | null
+    _max: NiveisMaxAggregateOutputType | null
+  }
+
+  export type NiveisAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NiveisSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type NiveisMinAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NiveisMaxAggregateOutputType = {
+    id: number | null
+    nome: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type NiveisCountAggregateOutputType = {
+    id: number
+    nome: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type NiveisAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type NiveisSumAggregateInputType = {
+    id?: true
+  }
+
+  export type NiveisMinAggregateInputType = {
+    id?: true
+    nome?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NiveisMaxAggregateInputType = {
+    id?: true
+    nome?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type NiveisCountAggregateInputType = {
+    id?: true
+    nome?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type NiveisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which niveis to aggregate.
+     */
+    where?: niveisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of niveis to fetch.
+     */
+    orderBy?: niveisOrderByWithRelationInput | niveisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: niveisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` niveis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` niveis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned niveis
+    **/
+    _count?: true | NiveisCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: NiveisAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: NiveisSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NiveisMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NiveisMaxAggregateInputType
+  }
+
+  export type GetNiveisAggregateType<T extends NiveisAggregateArgs> = {
+        [P in keyof T & keyof AggregateNiveis]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNiveis[P]>
+      : GetScalarType<T[P], AggregateNiveis[P]>
+  }
+
+
+
+
+  export type niveisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: niveisWhereInput
+    orderBy?: niveisOrderByWithAggregationInput | niveisOrderByWithAggregationInput[]
+    by: NiveisScalarFieldEnum[] | NiveisScalarFieldEnum
+    having?: niveisScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NiveisCountAggregateInputType | true
+    _avg?: NiveisAvgAggregateInputType
+    _sum?: NiveisSumAggregateInputType
+    _min?: NiveisMinAggregateInputType
+    _max?: NiveisMaxAggregateInputType
+  }
+
+  export type NiveisGroupByOutputType = {
+    id: number
+    nome: string
+    createdAt: Date | null
+    updatedAt: Date | null
+    _count: NiveisCountAggregateOutputType | null
+    _avg: NiveisAvgAggregateOutputType | null
+    _sum: NiveisSumAggregateOutputType | null
+    _min: NiveisMinAggregateOutputType | null
+    _max: NiveisMaxAggregateOutputType | null
+  }
+
+  type GetNiveisGroupByPayload<T extends niveisGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NiveisGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NiveisGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NiveisGroupByOutputType[P]>
+            : GetScalarType<T[P], NiveisGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type niveisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    usuario?: boolean | niveis$usuarioArgs<ExtArgs>
+    _count?: boolean | NiveisCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["niveis"]>
+
+  export type niveisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["niveis"]>
+
+  export type niveisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nome?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["niveis"]>
+
+  export type niveisSelectScalar = {
+    id?: boolean
+    nome?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type niveisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nome" | "createdAt" | "updatedAt", ExtArgs["result"]["niveis"]>
+  export type niveisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | niveis$usuarioArgs<ExtArgs>
+    _count?: boolean | NiveisCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type niveisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type niveisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $niveisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "niveis"
+    objects: {
+      usuario: Prisma.$usuariosPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nome: string
+      createdAt: Date | null
+      updatedAt: Date | null
+    }, ExtArgs["result"]["niveis"]>
+    composites: {}
+  }
+
+  type niveisGetPayload<S extends boolean | null | undefined | niveisDefaultArgs> = $Result.GetResult<Prisma.$niveisPayload, S>
+
+  type niveisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<niveisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NiveisCountAggregateInputType | true
+    }
+
+  export interface niveisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['niveis'], meta: { name: 'niveis' } }
+    /**
+     * Find zero or one Niveis that matches the filter.
+     * @param {niveisFindUniqueArgs} args - Arguments to find a Niveis
+     * @example
+     * // Get one Niveis
+     * const niveis = await prisma.niveis.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends niveisFindUniqueArgs>(args: SelectSubset<T, niveisFindUniqueArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Niveis that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {niveisFindUniqueOrThrowArgs} args - Arguments to find a Niveis
+     * @example
+     * // Get one Niveis
+     * const niveis = await prisma.niveis.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends niveisFindUniqueOrThrowArgs>(args: SelectSubset<T, niveisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Niveis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {niveisFindFirstArgs} args - Arguments to find a Niveis
+     * @example
+     * // Get one Niveis
+     * const niveis = await prisma.niveis.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends niveisFindFirstArgs>(args?: SelectSubset<T, niveisFindFirstArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Niveis that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {niveisFindFirstOrThrowArgs} args - Arguments to find a Niveis
+     * @example
+     * // Get one Niveis
+     * const niveis = await prisma.niveis.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends niveisFindFirstOrThrowArgs>(args?: SelectSubset<T, niveisFindFirstOrThrowArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Niveis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {niveisFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Niveis
+     * const niveis = await prisma.niveis.findMany()
+     * 
+     * // Get first 10 Niveis
+     * const niveis = await prisma.niveis.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const niveisWithIdOnly = await prisma.niveis.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends niveisFindManyArgs>(args?: SelectSubset<T, niveisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Niveis.
+     * @param {niveisCreateArgs} args - Arguments to create a Niveis.
+     * @example
+     * // Create one Niveis
+     * const Niveis = await prisma.niveis.create({
+     *   data: {
+     *     // ... data to create a Niveis
+     *   }
+     * })
+     * 
+     */
+    create<T extends niveisCreateArgs>(args: SelectSubset<T, niveisCreateArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Niveis.
+     * @param {niveisCreateManyArgs} args - Arguments to create many Niveis.
+     * @example
+     * // Create many Niveis
+     * const niveis = await prisma.niveis.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends niveisCreateManyArgs>(args?: SelectSubset<T, niveisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Niveis and returns the data saved in the database.
+     * @param {niveisCreateManyAndReturnArgs} args - Arguments to create many Niveis.
+     * @example
+     * // Create many Niveis
+     * const niveis = await prisma.niveis.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Niveis and only return the `id`
+     * const niveisWithIdOnly = await prisma.niveis.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends niveisCreateManyAndReturnArgs>(args?: SelectSubset<T, niveisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Niveis.
+     * @param {niveisDeleteArgs} args - Arguments to delete one Niveis.
+     * @example
+     * // Delete one Niveis
+     * const Niveis = await prisma.niveis.delete({
+     *   where: {
+     *     // ... filter to delete one Niveis
+     *   }
+     * })
+     * 
+     */
+    delete<T extends niveisDeleteArgs>(args: SelectSubset<T, niveisDeleteArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Niveis.
+     * @param {niveisUpdateArgs} args - Arguments to update one Niveis.
+     * @example
+     * // Update one Niveis
+     * const niveis = await prisma.niveis.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends niveisUpdateArgs>(args: SelectSubset<T, niveisUpdateArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Niveis.
+     * @param {niveisDeleteManyArgs} args - Arguments to filter Niveis to delete.
+     * @example
+     * // Delete a few Niveis
+     * const { count } = await prisma.niveis.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends niveisDeleteManyArgs>(args?: SelectSubset<T, niveisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Niveis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {niveisUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Niveis
+     * const niveis = await prisma.niveis.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends niveisUpdateManyArgs>(args: SelectSubset<T, niveisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Niveis and returns the data updated in the database.
+     * @param {niveisUpdateManyAndReturnArgs} args - Arguments to update many Niveis.
+     * @example
+     * // Update many Niveis
+     * const niveis = await prisma.niveis.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Niveis and only return the `id`
+     * const niveisWithIdOnly = await prisma.niveis.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends niveisUpdateManyAndReturnArgs>(args: SelectSubset<T, niveisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Niveis.
+     * @param {niveisUpsertArgs} args - Arguments to update or create a Niveis.
+     * @example
+     * // Update or create a Niveis
+     * const niveis = await prisma.niveis.upsert({
+     *   create: {
+     *     // ... data to create a Niveis
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Niveis we want to update
+     *   }
+     * })
+     */
+    upsert<T extends niveisUpsertArgs>(args: SelectSubset<T, niveisUpsertArgs<ExtArgs>>): Prisma__niveisClient<$Result.GetResult<Prisma.$niveisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Niveis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {niveisCountArgs} args - Arguments to filter Niveis to count.
+     * @example
+     * // Count the number of Niveis
+     * const count = await prisma.niveis.count({
+     *   where: {
+     *     // ... the filter for the Niveis we want to count
+     *   }
+     * })
+    **/
+    count<T extends niveisCountArgs>(
+      args?: Subset<T, niveisCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NiveisCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Niveis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NiveisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NiveisAggregateArgs>(args: Subset<T, NiveisAggregateArgs>): Prisma.PrismaPromise<GetNiveisAggregateType<T>>
+
+    /**
+     * Group by Niveis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {niveisGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends niveisGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: niveisGroupByArgs['orderBy'] }
+        : { orderBy?: niveisGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, niveisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNiveisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the niveis model
+   */
+  readonly fields: niveisFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for niveis.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__niveisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends niveis$usuarioArgs<ExtArgs> = {}>(args?: Subset<T, niveis$usuarioArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuariosPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the niveis model
+   */
+  interface niveisFieldRefs {
+    readonly id: FieldRef<"niveis", 'Int'>
+    readonly nome: FieldRef<"niveis", 'String'>
+    readonly createdAt: FieldRef<"niveis", 'DateTime'>
+    readonly updatedAt: FieldRef<"niveis", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * niveis findUnique
+   */
+  export type niveisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * Filter, which niveis to fetch.
+     */
+    where: niveisWhereUniqueInput
+  }
+
+  /**
+   * niveis findUniqueOrThrow
+   */
+  export type niveisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * Filter, which niveis to fetch.
+     */
+    where: niveisWhereUniqueInput
+  }
+
+  /**
+   * niveis findFirst
+   */
+  export type niveisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * Filter, which niveis to fetch.
+     */
+    where?: niveisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of niveis to fetch.
+     */
+    orderBy?: niveisOrderByWithRelationInput | niveisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for niveis.
+     */
+    cursor?: niveisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` niveis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` niveis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of niveis.
+     */
+    distinct?: NiveisScalarFieldEnum | NiveisScalarFieldEnum[]
+  }
+
+  /**
+   * niveis findFirstOrThrow
+   */
+  export type niveisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * Filter, which niveis to fetch.
+     */
+    where?: niveisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of niveis to fetch.
+     */
+    orderBy?: niveisOrderByWithRelationInput | niveisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for niveis.
+     */
+    cursor?: niveisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` niveis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` niveis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of niveis.
+     */
+    distinct?: NiveisScalarFieldEnum | NiveisScalarFieldEnum[]
+  }
+
+  /**
+   * niveis findMany
+   */
+  export type niveisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * Filter, which niveis to fetch.
+     */
+    where?: niveisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of niveis to fetch.
+     */
+    orderBy?: niveisOrderByWithRelationInput | niveisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing niveis.
+     */
+    cursor?: niveisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` niveis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` niveis.
+     */
+    skip?: number
+    distinct?: NiveisScalarFieldEnum | NiveisScalarFieldEnum[]
+  }
+
+  /**
+   * niveis create
+   */
+  export type niveisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * The data needed to create a niveis.
+     */
+    data: XOR<niveisCreateInput, niveisUncheckedCreateInput>
+  }
+
+  /**
+   * niveis createMany
+   */
+  export type niveisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many niveis.
+     */
+    data: niveisCreateManyInput | niveisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * niveis createManyAndReturn
+   */
+  export type niveisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * The data used to create many niveis.
+     */
+    data: niveisCreateManyInput | niveisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * niveis update
+   */
+  export type niveisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * The data needed to update a niveis.
+     */
+    data: XOR<niveisUpdateInput, niveisUncheckedUpdateInput>
+    /**
+     * Choose, which niveis to update.
+     */
+    where: niveisWhereUniqueInput
+  }
+
+  /**
+   * niveis updateMany
+   */
+  export type niveisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update niveis.
+     */
+    data: XOR<niveisUpdateManyMutationInput, niveisUncheckedUpdateManyInput>
+    /**
+     * Filter which niveis to update
+     */
+    where?: niveisWhereInput
+    /**
+     * Limit how many niveis to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * niveis updateManyAndReturn
+   */
+  export type niveisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * The data used to update niveis.
+     */
+    data: XOR<niveisUpdateManyMutationInput, niveisUncheckedUpdateManyInput>
+    /**
+     * Filter which niveis to update
+     */
+    where?: niveisWhereInput
+    /**
+     * Limit how many niveis to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * niveis upsert
+   */
+  export type niveisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * The filter to search for the niveis to update in case it exists.
+     */
+    where: niveisWhereUniqueInput
+    /**
+     * In case the niveis found by the `where` argument doesn't exist, create a new niveis with this data.
+     */
+    create: XOR<niveisCreateInput, niveisUncheckedCreateInput>
+    /**
+     * In case the niveis was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<niveisUpdateInput, niveisUncheckedUpdateInput>
+  }
+
+  /**
+   * niveis delete
+   */
+  export type niveisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
+    /**
+     * Filter which niveis to delete.
+     */
+    where: niveisWhereUniqueInput
+  }
+
+  /**
+   * niveis deleteMany
+   */
+  export type niveisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which niveis to delete
+     */
+    where?: niveisWhereInput
+    /**
+     * Limit how many niveis to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * niveis.usuario
+   */
+  export type niveis$usuarioArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the usuarios
+     */
+    select?: usuariosSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the usuarios
+     */
+    omit?: usuariosOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: usuariosInclude<ExtArgs> | null
+    where?: usuariosWhereInput
+    orderBy?: usuariosOrderByWithRelationInput | usuariosOrderByWithRelationInput[]
+    cursor?: usuariosWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UsuariosScalarFieldEnum | UsuariosScalarFieldEnum[]
+  }
+
+  /**
+   * niveis without action
+   */
+  export type niveisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the niveis
+     */
+    select?: niveisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the niveis
+     */
+    omit?: niveisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: niveisInclude<ExtArgs> | null
   }
 
 
@@ -7095,6 +8379,7 @@ export namespace Prisma {
     missao_id: 'missao_id',
     produto_id: 'produto_id',
     preco: 'preco',
+    preco_desconto: 'preco_desconto',
     observacoes: 'observacoes',
     status: 'status',
     createdAt: 'createdAt',
@@ -7135,11 +8420,22 @@ export namespace Prisma {
     email: 'email',
     senha: 'senha',
     foto: 'foto',
+    nivel_id: 'nivel_id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type UsuariosScalarFieldEnum = (typeof UsuariosScalarFieldEnum)[keyof typeof UsuariosScalarFieldEnum]
+
+
+  export const NiveisScalarFieldEnum: {
+    id: 'id',
+    nome: 'nome',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type NiveisScalarFieldEnum = (typeof NiveisScalarFieldEnum)[keyof typeof NiveisScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7305,6 +8601,7 @@ export namespace Prisma {
     missao_id?: IntFilter<"missao_produto"> | number
     produto_id?: IntFilter<"missao_produto"> | number
     preco?: FloatNullableFilter<"missao_produto"> | number | null
+    preco_desconto?: FloatNullableFilter<"missao_produto"> | number | null
     observacoes?: StringNullableFilter<"missao_produto"> | string | null
     status?: StringFilter<"missao_produto"> | string
     createdAt?: DateTimeNullableFilter<"missao_produto"> | Date | string | null
@@ -7318,6 +8615,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrderInput | SortOrder
+    preco_desconto?: SortOrderInput | SortOrder
     observacoes?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrderInput | SortOrder
@@ -7334,6 +8632,7 @@ export namespace Prisma {
     missao_id?: IntFilter<"missao_produto"> | number
     produto_id?: IntFilter<"missao_produto"> | number
     preco?: FloatNullableFilter<"missao_produto"> | number | null
+    preco_desconto?: FloatNullableFilter<"missao_produto"> | number | null
     observacoes?: StringNullableFilter<"missao_produto"> | string | null
     status?: StringFilter<"missao_produto"> | string
     createdAt?: DateTimeNullableFilter<"missao_produto"> | Date | string | null
@@ -7347,6 +8646,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrderInput | SortOrder
+    preco_desconto?: SortOrderInput | SortOrder
     observacoes?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrderInput | SortOrder
@@ -7366,6 +8666,7 @@ export namespace Prisma {
     missao_id?: IntWithAggregatesFilter<"missao_produto"> | number
     produto_id?: IntWithAggregatesFilter<"missao_produto"> | number
     preco?: FloatNullableWithAggregatesFilter<"missao_produto"> | number | null
+    preco_desconto?: FloatNullableWithAggregatesFilter<"missao_produto"> | number | null
     observacoes?: StringNullableWithAggregatesFilter<"missao_produto"> | string | null
     status?: StringWithAggregatesFilter<"missao_produto"> | string
     createdAt?: DateTimeNullableWithAggregatesFilter<"missao_produto"> | Date | string | null
@@ -7516,9 +8817,11 @@ export namespace Prisma {
     email?: StringFilter<"usuarios"> | string
     senha?: StringFilter<"usuarios"> | string
     foto?: StringNullableFilter<"usuarios"> | string | null
+    nivel_id?: IntNullableFilter<"usuarios"> | number | null
     createdAt?: DateTimeNullableFilter<"usuarios"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"usuarios"> | Date | string | null
     missoes?: MissoesListRelationFilter
+    nivel?: XOR<NiveisNullableScalarRelationFilter, niveisWhereInput> | null
   }
 
   export type usuariosOrderByWithRelationInput = {
@@ -7527,9 +8830,11 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     foto?: SortOrderInput | SortOrder
+    nivel_id?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
     missoes?: missoesOrderByRelationAggregateInput
+    nivel?: niveisOrderByWithRelationInput
   }
 
   export type usuariosWhereUniqueInput = Prisma.AtLeast<{
@@ -7541,9 +8846,11 @@ export namespace Prisma {
     email?: StringFilter<"usuarios"> | string
     senha?: StringFilter<"usuarios"> | string
     foto?: StringNullableFilter<"usuarios"> | string | null
+    nivel_id?: IntNullableFilter<"usuarios"> | number | null
     createdAt?: DateTimeNullableFilter<"usuarios"> | Date | string | null
     updatedAt?: DateTimeNullableFilter<"usuarios"> | Date | string | null
     missoes?: MissoesListRelationFilter
+    nivel?: XOR<NiveisNullableScalarRelationFilter, niveisWhereInput> | null
   }, "id">
 
   export type usuariosOrderByWithAggregationInput = {
@@ -7552,6 +8859,7 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     foto?: SortOrderInput | SortOrder
+    nivel_id?: SortOrderInput | SortOrder
     createdAt?: SortOrderInput | SortOrder
     updatedAt?: SortOrderInput | SortOrder
     _count?: usuariosCountOrderByAggregateInput
@@ -7570,8 +8878,61 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter<"usuarios"> | string
     senha?: StringWithAggregatesFilter<"usuarios"> | string
     foto?: StringNullableWithAggregatesFilter<"usuarios"> | string | null
+    nivel_id?: IntNullableWithAggregatesFilter<"usuarios"> | number | null
     createdAt?: DateTimeNullableWithAggregatesFilter<"usuarios"> | Date | string | null
     updatedAt?: DateTimeNullableWithAggregatesFilter<"usuarios"> | Date | string | null
+  }
+
+  export type niveisWhereInput = {
+    AND?: niveisWhereInput | niveisWhereInput[]
+    OR?: niveisWhereInput[]
+    NOT?: niveisWhereInput | niveisWhereInput[]
+    id?: IntFilter<"niveis"> | number
+    nome?: StringFilter<"niveis"> | string
+    createdAt?: DateTimeNullableFilter<"niveis"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"niveis"> | Date | string | null
+    usuario?: UsuariosListRelationFilter
+  }
+
+  export type niveisOrderByWithRelationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    usuario?: usuariosOrderByRelationAggregateInput
+  }
+
+  export type niveisWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: niveisWhereInput | niveisWhereInput[]
+    OR?: niveisWhereInput[]
+    NOT?: niveisWhereInput | niveisWhereInput[]
+    nome?: StringFilter<"niveis"> | string
+    createdAt?: DateTimeNullableFilter<"niveis"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"niveis"> | Date | string | null
+    usuario?: UsuariosListRelationFilter
+  }, "id">
+
+  export type niveisOrderByWithAggregationInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    createdAt?: SortOrderInput | SortOrder
+    updatedAt?: SortOrderInput | SortOrder
+    _count?: niveisCountOrderByAggregateInput
+    _avg?: niveisAvgOrderByAggregateInput
+    _max?: niveisMaxOrderByAggregateInput
+    _min?: niveisMinOrderByAggregateInput
+    _sum?: niveisSumOrderByAggregateInput
+  }
+
+  export type niveisScalarWhereWithAggregatesInput = {
+    AND?: niveisScalarWhereWithAggregatesInput | niveisScalarWhereWithAggregatesInput[]
+    OR?: niveisScalarWhereWithAggregatesInput[]
+    NOT?: niveisScalarWhereWithAggregatesInput | niveisScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"niveis"> | number
+    nome?: StringWithAggregatesFilter<"niveis"> | string
+    createdAt?: DateTimeNullableWithAggregatesFilter<"niveis"> | Date | string | null
+    updatedAt?: DateTimeNullableWithAggregatesFilter<"niveis"> | Date | string | null
   }
 
   export type concorrentesCreateInput = {
@@ -7647,6 +9008,7 @@ export namespace Prisma {
 
   export type missao_produtoCreateInput = {
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -7660,6 +9022,7 @@ export namespace Prisma {
     missao_id: number
     produto_id: number
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -7668,6 +9031,7 @@ export namespace Prisma {
 
   export type missao_produtoUpdateInput = {
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7681,6 +9045,7 @@ export namespace Prisma {
     missao_id?: IntFieldUpdateOperationsInput | number
     produto_id?: IntFieldUpdateOperationsInput | number
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7692,6 +9057,7 @@ export namespace Prisma {
     missao_id: number
     produto_id: number
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -7700,6 +9066,7 @@ export namespace Prisma {
 
   export type missao_produtoUpdateManyMutationInput = {
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7711,6 +9078,7 @@ export namespace Prisma {
     missao_id?: IntFieldUpdateOperationsInput | number
     produto_id?: IntFieldUpdateOperationsInput | number
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -7858,6 +9226,7 @@ export namespace Prisma {
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     missoes?: missoesCreateNestedManyWithoutUsuariosInput
+    nivel?: niveisCreateNestedOneWithoutUsuarioInput
   }
 
   export type usuariosUncheckedCreateInput = {
@@ -7866,6 +9235,7 @@ export namespace Prisma {
     email: string
     senha: string
     foto?: string | null
+    nivel_id?: number | null
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
     missoes?: missoesUncheckedCreateNestedManyWithoutUsuariosInput
@@ -7879,6 +9249,7 @@ export namespace Prisma {
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     missoes?: missoesUpdateManyWithoutUsuariosNestedInput
+    nivel?: niveisUpdateOneWithoutUsuarioNestedInput
   }
 
   export type usuariosUncheckedUpdateInput = {
@@ -7887,6 +9258,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    nivel_id?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     missoes?: missoesUncheckedUpdateManyWithoutUsuariosNestedInput
@@ -7898,6 +9270,7 @@ export namespace Prisma {
     email: string
     senha: string
     foto?: string | null
+    nivel_id?: number | null
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
   }
@@ -7917,6 +9290,57 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    nivel_id?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type niveisCreateInput = {
+    nome: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    usuario?: usuariosCreateNestedManyWithoutNivelInput
+  }
+
+  export type niveisUncheckedCreateInput = {
+    id?: number
+    nome: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    usuario?: usuariosUncheckedCreateNestedManyWithoutNivelInput
+  }
+
+  export type niveisUpdateInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usuario?: usuariosUpdateManyWithoutNivelNestedInput
+  }
+
+  export type niveisUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    usuario?: usuariosUncheckedUpdateManyWithoutNivelNestedInput
+  }
+
+  export type niveisCreateManyInput = {
+    id?: number
+    nome: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type niveisUpdateManyMutationInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type niveisUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -8118,6 +9542,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrder
+    preco_desconto?: SortOrder
     observacoes?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -8129,6 +9554,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrder
+    preco_desconto?: SortOrder
   }
 
   export type missao_produtoMaxOrderByAggregateInput = {
@@ -8136,6 +9562,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrder
+    preco_desconto?: SortOrder
     observacoes?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -8147,6 +9574,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrder
+    preco_desconto?: SortOrder
     observacoes?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
@@ -8158,6 +9586,7 @@ export namespace Prisma {
     missao_id?: SortOrder
     produto_id?: SortOrder
     preco?: SortOrder
+    preco_desconto?: SortOrder
   }
 
   export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8329,18 +9758,25 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NiveisNullableScalarRelationFilter = {
+    is?: niveisWhereInput | null
+    isNot?: niveisWhereInput | null
+  }
+
   export type usuariosCountOrderByAggregateInput = {
     id?: SortOrder
     nome?: SortOrder
     email?: SortOrder
     senha?: SortOrder
     foto?: SortOrder
+    nivel_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type usuariosAvgOrderByAggregateInput = {
     id?: SortOrder
+    nivel_id?: SortOrder
   }
 
   export type usuariosMaxOrderByAggregateInput = {
@@ -8349,6 +9785,7 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     foto?: SortOrder
+    nivel_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8359,11 +9796,52 @@ export namespace Prisma {
     email?: SortOrder
     senha?: SortOrder
     foto?: SortOrder
+    nivel_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type usuariosSumOrderByAggregateInput = {
+    id?: SortOrder
+    nivel_id?: SortOrder
+  }
+
+  export type UsuariosListRelationFilter = {
+    every?: usuariosWhereInput
+    some?: usuariosWhereInput
+    none?: usuariosWhereInput
+  }
+
+  export type usuariosOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type niveisCountOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type niveisAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type niveisMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type niveisMinOrderByAggregateInput = {
+    id?: SortOrder
+    nome?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type niveisSumOrderByAggregateInput = {
     id?: SortOrder
   }
 
@@ -8602,6 +10080,12 @@ export namespace Prisma {
     connect?: missoesWhereUniqueInput | missoesWhereUniqueInput[]
   }
 
+  export type niveisCreateNestedOneWithoutUsuarioInput = {
+    create?: XOR<niveisCreateWithoutUsuarioInput, niveisUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: niveisCreateOrConnectWithoutUsuarioInput
+    connect?: niveisWhereUniqueInput
+  }
+
   export type missoesUncheckedCreateNestedManyWithoutUsuariosInput = {
     create?: XOR<missoesCreateWithoutUsuariosInput, missoesUncheckedCreateWithoutUsuariosInput> | missoesCreateWithoutUsuariosInput[] | missoesUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: missoesCreateOrConnectWithoutUsuariosInput | missoesCreateOrConnectWithoutUsuariosInput[]
@@ -8623,6 +10107,16 @@ export namespace Prisma {
     deleteMany?: missoesScalarWhereInput | missoesScalarWhereInput[]
   }
 
+  export type niveisUpdateOneWithoutUsuarioNestedInput = {
+    create?: XOR<niveisCreateWithoutUsuarioInput, niveisUncheckedCreateWithoutUsuarioInput>
+    connectOrCreate?: niveisCreateOrConnectWithoutUsuarioInput
+    upsert?: niveisUpsertWithoutUsuarioInput
+    disconnect?: niveisWhereInput | boolean
+    delete?: niveisWhereInput | boolean
+    connect?: niveisWhereUniqueInput
+    update?: XOR<XOR<niveisUpdateToOneWithWhereWithoutUsuarioInput, niveisUpdateWithoutUsuarioInput>, niveisUncheckedUpdateWithoutUsuarioInput>
+  }
+
   export type missoesUncheckedUpdateManyWithoutUsuariosNestedInput = {
     create?: XOR<missoesCreateWithoutUsuariosInput, missoesUncheckedCreateWithoutUsuariosInput> | missoesCreateWithoutUsuariosInput[] | missoesUncheckedCreateWithoutUsuariosInput[]
     connectOrCreate?: missoesCreateOrConnectWithoutUsuariosInput | missoesCreateOrConnectWithoutUsuariosInput[]
@@ -8635,6 +10129,48 @@ export namespace Prisma {
     update?: missoesUpdateWithWhereUniqueWithoutUsuariosInput | missoesUpdateWithWhereUniqueWithoutUsuariosInput[]
     updateMany?: missoesUpdateManyWithWhereWithoutUsuariosInput | missoesUpdateManyWithWhereWithoutUsuariosInput[]
     deleteMany?: missoesScalarWhereInput | missoesScalarWhereInput[]
+  }
+
+  export type usuariosCreateNestedManyWithoutNivelInput = {
+    create?: XOR<usuariosCreateWithoutNivelInput, usuariosUncheckedCreateWithoutNivelInput> | usuariosCreateWithoutNivelInput[] | usuariosUncheckedCreateWithoutNivelInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutNivelInput | usuariosCreateOrConnectWithoutNivelInput[]
+    createMany?: usuariosCreateManyNivelInputEnvelope
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+  }
+
+  export type usuariosUncheckedCreateNestedManyWithoutNivelInput = {
+    create?: XOR<usuariosCreateWithoutNivelInput, usuariosUncheckedCreateWithoutNivelInput> | usuariosCreateWithoutNivelInput[] | usuariosUncheckedCreateWithoutNivelInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutNivelInput | usuariosCreateOrConnectWithoutNivelInput[]
+    createMany?: usuariosCreateManyNivelInputEnvelope
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+  }
+
+  export type usuariosUpdateManyWithoutNivelNestedInput = {
+    create?: XOR<usuariosCreateWithoutNivelInput, usuariosUncheckedCreateWithoutNivelInput> | usuariosCreateWithoutNivelInput[] | usuariosUncheckedCreateWithoutNivelInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutNivelInput | usuariosCreateOrConnectWithoutNivelInput[]
+    upsert?: usuariosUpsertWithWhereUniqueWithoutNivelInput | usuariosUpsertWithWhereUniqueWithoutNivelInput[]
+    createMany?: usuariosCreateManyNivelInputEnvelope
+    set?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    disconnect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    delete?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    update?: usuariosUpdateWithWhereUniqueWithoutNivelInput | usuariosUpdateWithWhereUniqueWithoutNivelInput[]
+    updateMany?: usuariosUpdateManyWithWhereWithoutNivelInput | usuariosUpdateManyWithWhereWithoutNivelInput[]
+    deleteMany?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+  }
+
+  export type usuariosUncheckedUpdateManyWithoutNivelNestedInput = {
+    create?: XOR<usuariosCreateWithoutNivelInput, usuariosUncheckedCreateWithoutNivelInput> | usuariosCreateWithoutNivelInput[] | usuariosUncheckedCreateWithoutNivelInput[]
+    connectOrCreate?: usuariosCreateOrConnectWithoutNivelInput | usuariosCreateOrConnectWithoutNivelInput[]
+    upsert?: usuariosUpsertWithWhereUniqueWithoutNivelInput | usuariosUpsertWithWhereUniqueWithoutNivelInput[]
+    createMany?: usuariosCreateManyNivelInputEnvelope
+    set?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    disconnect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    delete?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    connect?: usuariosWhereUniqueInput | usuariosWhereUniqueInput[]
+    update?: usuariosUpdateWithWhereUniqueWithoutNivelInput | usuariosUpdateWithWhereUniqueWithoutNivelInput[]
+    updateMany?: usuariosUpdateManyWithWhereWithoutNivelInput | usuariosUpdateManyWithWhereWithoutNivelInput[]
+    deleteMany?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -8993,6 +10529,7 @@ export namespace Prisma {
 
   export type missao_produtoCreateWithoutMissoesInput = {
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -9004,6 +10541,7 @@ export namespace Prisma {
     id?: number
     produto_id: number
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -9051,6 +10589,7 @@ export namespace Prisma {
     foto?: string | null
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
+    nivel?: niveisCreateNestedOneWithoutUsuarioInput
   }
 
   export type usuariosUncheckedCreateWithoutMissoesInput = {
@@ -9059,6 +10598,7 @@ export namespace Prisma {
     email: string
     senha: string
     foto?: string | null
+    nivel_id?: number | null
     createdAt?: Date | string | null
     updatedAt?: Date | string | null
   }
@@ -9092,6 +10632,7 @@ export namespace Prisma {
     missao_id?: IntFilter<"missao_produto"> | number
     produto_id?: IntFilter<"missao_produto"> | number
     preco?: FloatNullableFilter<"missao_produto"> | number | null
+    preco_desconto?: FloatNullableFilter<"missao_produto"> | number | null
     observacoes?: StringNullableFilter<"missao_produto"> | string | null
     status?: StringFilter<"missao_produto"> | string
     createdAt?: DateTimeNullableFilter<"missao_produto"> | Date | string | null
@@ -9146,6 +10687,7 @@ export namespace Prisma {
     foto?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nivel?: niveisUpdateOneWithoutUsuarioNestedInput
   }
 
   export type usuariosUncheckedUpdateWithoutMissoesInput = {
@@ -9154,12 +10696,14 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     senha?: StringFieldUpdateOperationsInput | string
     foto?: NullableStringFieldUpdateOperationsInput | string | null
+    nivel_id?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type missao_produtoCreateWithoutProdutosInput = {
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -9171,6 +10715,7 @@ export namespace Prisma {
     id?: number
     missao_id: number
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -9230,6 +10775,24 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type niveisCreateWithoutUsuarioInput = {
+    nome: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type niveisUncheckedCreateWithoutUsuarioInput = {
+    id?: number
+    nome: string
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type niveisCreateOrConnectWithoutUsuarioInput = {
+    where: niveisWhereUniqueInput
+    create: XOR<niveisCreateWithoutUsuarioInput, niveisUncheckedCreateWithoutUsuarioInput>
+  }
+
   export type missoesUpsertWithWhereUniqueWithoutUsuariosInput = {
     where: missoesWhereUniqueInput
     update: XOR<missoesUpdateWithoutUsuariosInput, missoesUncheckedUpdateWithoutUsuariosInput>
@@ -9244,6 +10807,91 @@ export namespace Prisma {
   export type missoesUpdateManyWithWhereWithoutUsuariosInput = {
     where: missoesScalarWhereInput
     data: XOR<missoesUpdateManyMutationInput, missoesUncheckedUpdateManyWithoutUsuariosInput>
+  }
+
+  export type niveisUpsertWithoutUsuarioInput = {
+    update: XOR<niveisUpdateWithoutUsuarioInput, niveisUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<niveisCreateWithoutUsuarioInput, niveisUncheckedCreateWithoutUsuarioInput>
+    where?: niveisWhereInput
+  }
+
+  export type niveisUpdateToOneWithWhereWithoutUsuarioInput = {
+    where?: niveisWhereInput
+    data: XOR<niveisUpdateWithoutUsuarioInput, niveisUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type niveisUpdateWithoutUsuarioInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type niveisUncheckedUpdateWithoutUsuarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type usuariosCreateWithoutNivelInput = {
+    nome: string
+    email: string
+    senha: string
+    foto?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    missoes?: missoesCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type usuariosUncheckedCreateWithoutNivelInput = {
+    id?: number
+    nome: string
+    email: string
+    senha: string
+    foto?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+    missoes?: missoesUncheckedCreateNestedManyWithoutUsuariosInput
+  }
+
+  export type usuariosCreateOrConnectWithoutNivelInput = {
+    where: usuariosWhereUniqueInput
+    create: XOR<usuariosCreateWithoutNivelInput, usuariosUncheckedCreateWithoutNivelInput>
+  }
+
+  export type usuariosCreateManyNivelInputEnvelope = {
+    data: usuariosCreateManyNivelInput | usuariosCreateManyNivelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type usuariosUpsertWithWhereUniqueWithoutNivelInput = {
+    where: usuariosWhereUniqueInput
+    update: XOR<usuariosUpdateWithoutNivelInput, usuariosUncheckedUpdateWithoutNivelInput>
+    create: XOR<usuariosCreateWithoutNivelInput, usuariosUncheckedCreateWithoutNivelInput>
+  }
+
+  export type usuariosUpdateWithWhereUniqueWithoutNivelInput = {
+    where: usuariosWhereUniqueInput
+    data: XOR<usuariosUpdateWithoutNivelInput, usuariosUncheckedUpdateWithoutNivelInput>
+  }
+
+  export type usuariosUpdateManyWithWhereWithoutNivelInput = {
+    where: usuariosScalarWhereInput
+    data: XOR<usuariosUpdateManyMutationInput, usuariosUncheckedUpdateManyWithoutNivelInput>
+  }
+
+  export type usuariosScalarWhereInput = {
+    AND?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+    OR?: usuariosScalarWhereInput[]
+    NOT?: usuariosScalarWhereInput | usuariosScalarWhereInput[]
+    id?: IntFilter<"usuarios"> | number
+    nome?: StringFilter<"usuarios"> | string
+    email?: StringFilter<"usuarios"> | string
+    senha?: StringFilter<"usuarios"> | string
+    foto?: StringNullableFilter<"usuarios"> | string | null
+    nivel_id?: IntNullableFilter<"usuarios"> | number | null
+    createdAt?: DateTimeNullableFilter<"usuarios"> | Date | string | null
+    updatedAt?: DateTimeNullableFilter<"usuarios"> | Date | string | null
   }
 
   export type missoesCreateManyConcorrentesInput = {
@@ -9283,6 +10931,7 @@ export namespace Prisma {
     id?: number
     produto_id: number
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -9291,6 +10940,7 @@ export namespace Prisma {
 
   export type missao_produtoUpdateWithoutMissoesInput = {
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9302,6 +10952,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produto_id?: IntFieldUpdateOperationsInput | number
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9312,6 +10963,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     produto_id?: IntFieldUpdateOperationsInput | number
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9322,6 +10974,7 @@ export namespace Prisma {
     id?: number
     missao_id: number
     preco?: number | null
+    preco_desconto?: number | null
     observacoes?: string | null
     status?: string
     createdAt?: Date | string | null
@@ -9330,6 +10983,7 @@ export namespace Prisma {
 
   export type missao_produtoUpdateWithoutProdutosInput = {
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9341,6 +10995,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     missao_id?: IntFieldUpdateOperationsInput | number
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9351,6 +11006,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     missao_id?: IntFieldUpdateOperationsInput | number
     preco?: NullableFloatFieldUpdateOperationsInput | number | null
+    preco_desconto?: NullableFloatFieldUpdateOperationsInput | number | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9386,6 +11042,47 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     concorrente_id?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type usuariosCreateManyNivelInput = {
+    id?: number
+    nome: string
+    email: string
+    senha: string
+    foto?: string | null
+    createdAt?: Date | string | null
+    updatedAt?: Date | string | null
+  }
+
+  export type usuariosUpdateWithoutNivelInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    missoes?: missoesUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type usuariosUncheckedUpdateWithoutNivelInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    missoes?: missoesUncheckedUpdateManyWithoutUsuariosNestedInput
+  }
+
+  export type usuariosUncheckedUpdateManyWithoutNivelInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha?: StringFieldUpdateOperationsInput | string
+    foto?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

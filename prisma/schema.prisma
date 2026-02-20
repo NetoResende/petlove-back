@@ -9,36 +9,37 @@ datasource db {
 }
 
 model concorrentes {
-  id       Int       @id @default(autoincrement())
-  nome     String    @db.VarChar(50)
-  tipo     String    @db.VarChar(20)
-  endereco String    @db.VarChar(100)
-  foto     String?   @db.VarChar(255)
+  id        Int       @id @default(autoincrement())
+  nome      String    @db.VarChar(50)
+  tipo      String    @db.VarChar(20)
+  endereco  String    @db.VarChar(100)
+  foto      String?   @db.VarChar(255)
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
-  missoes  missoes[]
+  missoes   missoes[]
 }
 
 model missao_produto {
-  id          Int      @id @default(autoincrement())
-  missao_id   Int
-  produto_id  Int
-  preco       Float?
-  observacoes String?  @db.VarChar(255)
-  status      String   @db.VarChar(15) @default("pendente")
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
-  missoes     missoes  @relation(fields: [missao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "missao_produto_fk1")
-  produtos    produtos @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "missao_produto_fk2")
+  id             Int       @id @default(autoincrement())
+  missao_id      Int
+  produto_id     Int
+  preco          Float?
+  preco_desconto Float?
+  observacoes    String?   @db.VarChar(255)
+  status         String    @default("pendente") @db.VarChar(15)
+  createdAt      DateTime? @default(now())
+  updatedAt      DateTime? @updatedAt
+  missoes        missoes   @relation(fields: [missao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "missao_produto_fk1")
+  produtos       produtos  @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "missao_produto_fk2")
 }
 
 model missoes {
   id             Int              @id @default(autoincrement())
   concorrente_id Int
-  status         String           @db.VarChar(15) @default("pendente")
+  status         String           @default("pendente") @db.VarChar(15)
   usuario_id     Int?
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  createdAt      DateTime?        @default(now())
+  updatedAt      DateTime?        @updatedAt
   missao_produto missao_produto[]
   concorrentes   concorrentes     @relation(fields: [concorrente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "missoes_fk1")
   usuarios       usuarios?        @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "missoes_fk3")
@@ -50,18 +51,28 @@ model produtos {
   preco          Float
   codigo         String?          @db.VarChar(30)
   foto           String?          @db.VarChar(255)
-  createdAt DateTime? @default(now())
-  updatedAt DateTime? @updatedAt
+  createdAt      DateTime?        @default(now())
+  updatedAt      DateTime?        @updatedAt
   missao_produto missao_produto[]
 }
 
 model usuarios {
-  id      Int       @id @default(autoincrement())
-  nome    String    @db.VarChar(50)
-  email   String    @db.VarChar(50)
-  senha   String    @db.VarChar(255)
-  foto    String?   @db.VarChar(255)
+  id        Int       @id @default(autoincrement())
+  nome      String    @db.VarChar(50)
+  email     String    @db.VarChar(50)
+  senha     String    @db.VarChar(255)
+  foto      String?   @db.VarChar(255)
+  nivel_id  Int?
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
-  missoes missoes[]
+  missoes   missoes[]
+  nivel     niveis?   @relation(fields: [nivel_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "niveis_fk4")
+}
+
+model niveis {
+  id        Int        @id @default(autoincrement())
+  nome      String     @db.VarChar(50)
+  createdAt DateTime?  @default(now())
+  updatedAt DateTime?  @updatedAt
+  usuario   usuarios[]
 }

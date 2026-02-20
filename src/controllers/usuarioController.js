@@ -3,7 +3,11 @@ import bcrypt from "bcrypt"
 
 async function buscar() {
     try {
-        return await prisma.usuarios.findMany()
+        return await prisma.usuarios.findMany({
+            include:{
+                nivel:true
+            }
+        })
     } catch (error) {
         return {
             type: "error",
@@ -16,6 +20,9 @@ async function buscarPorId(id) {
         const request = await prisma.usuarios.findUnique({
             where: {
                 id: Number(id)
+            },
+            include:{
+                nivel:true
             }
         });
         if (request) {
@@ -61,8 +68,11 @@ async function criar(dados) {
 async function editar(dados) {
 
     try {
-        const senhaSegura = await bcrypt.hash(dados.senha, 10)
-        dados.senha = senhaSegura
+        if (dados.senha) {
+            const senhaSegura = await bcrypt.hash(dados.senha, 10)
+            dados.senha = senhaSegura
+
+        }
 
         const request = await prisma.usuarios.update({
             data: dados,
@@ -119,7 +129,7 @@ async function login(dados) {
         if (usuario) {
             const senhaCorreta = await bcrypt.compare(dados.senha, usuario.senha)
 
-            if(senhaCorreta){
+            if (senhaCorreta) {
                 return usuario
             }
             return {

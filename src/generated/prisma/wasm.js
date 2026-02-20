@@ -108,6 +108,7 @@ exports.Prisma.Missao_produtoScalarFieldEnum = {
   missao_id: 'missao_id',
   produto_id: 'produto_id',
   preco: 'preco',
+  preco_desconto: 'preco_desconto',
   observacoes: 'observacoes',
   status: 'status',
   createdAt: 'createdAt',
@@ -139,6 +140,14 @@ exports.Prisma.UsuariosScalarFieldEnum = {
   email: 'email',
   senha: 'senha',
   foto: 'foto',
+  nivel_id: 'nivel_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.NiveisScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -164,7 +173,8 @@ exports.Prisma.ModelName = {
   missao_produto: 'missao_produto',
   missoes: 'missoes',
   produtos: 'produtos',
-  usuarios: 'usuarios'
+  usuarios: 'usuarios',
+  niveis: 'niveis'
 };
 /**
  * Create the Client
@@ -177,7 +187,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/raimundo-gomes/Documentos/CURSO_JavaScript_Gleydson_Teixera/projeto-petlove/petlove-back/src/generated/prisma",
+      "value": "E:\\OneDrive\\Documentos\\1 - Reforço Dev\\petlove-back\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -186,12 +196,12 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "debian-openssl-3.0.x",
+        "value": "windows",
         "native": true
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/raimundo-gomes/Documentos/CURSO_JavaScript_Gleydson_Teixera/projeto-petlove/petlove-back/prisma/schema.prisma",
+    "sourceFilePath": "E:\\OneDrive\\Documentos\\1 - Reforço Dev\\petlove-back\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -205,7 +215,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -214,13 +223,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel concorrentes {\n  id        Int       @id @default(autoincrement())\n  nome      String    @db.VarChar(50)\n  tipo      String    @db.VarChar(20)\n  endereco  String    @db.VarChar(100)\n  foto      String?   @db.VarChar(255)\n  createdAt DateTime? @default(now())\n  updatedAt DateTime? @updatedAt\n  missoes   missoes[]\n}\n\nmodel missao_produto {\n  id          Int       @id @default(autoincrement())\n  missao_id   Int\n  produto_id  Int\n  preco       Float?\n  observacoes String?   @db.VarChar(255)\n  status      String    @default(\"pendente\") @db.VarChar(15)\n  createdAt   DateTime? @default(now())\n  updatedAt   DateTime? @updatedAt\n  missoes     missoes   @relation(fields: [missao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"missao_produto_fk1\")\n  produtos    produtos  @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"missao_produto_fk2\")\n}\n\nmodel missoes {\n  id             Int              @id @default(autoincrement())\n  concorrente_id Int\n  status         String           @default(\"pendente\") @db.VarChar(15)\n  usuario_id     Int?\n  createdAt      DateTime?        @default(now())\n  updatedAt      DateTime?        @updatedAt\n  missao_produto missao_produto[]\n  concorrentes   concorrentes     @relation(fields: [concorrente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"missoes_fk1\")\n  usuarios       usuarios?        @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"missoes_fk3\")\n}\n\nmodel produtos {\n  id             Int              @id @default(autoincrement())\n  nome           String           @db.VarChar(255)\n  preco          Float\n  codigo         String?          @db.VarChar(30)\n  foto           String?          @db.VarChar(255)\n  createdAt      DateTime?        @default(now())\n  updatedAt      DateTime?        @updatedAt\n  missao_produto missao_produto[]\n}\n\nmodel usuarios {\n  id        Int       @id @default(autoincrement())\n  nome      String    @db.VarChar(50)\n  email     String    @db.VarChar(50)\n  senha     String    @db.VarChar(255)\n  foto      String?   @db.VarChar(255)\n  createdAt DateTime? @default(now())\n  updatedAt DateTime? @updatedAt\n  missoes   missoes[]\n}\n",
-  "inlineSchemaHash": "cf7493d404d48a53f250245449f7e72cb1fe7319ab92ff4bc86ed918ee25abe0",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel concorrentes {\n  id        Int       @id @default(autoincrement())\n  nome      String    @db.VarChar(50)\n  tipo      String    @db.VarChar(20)\n  endereco  String    @db.VarChar(100)\n  foto      String?   @db.VarChar(255)\n  createdAt DateTime? @default(now())\n  updatedAt DateTime? @updatedAt\n  missoes   missoes[]\n}\n\nmodel missao_produto {\n  id             Int       @id @default(autoincrement())\n  missao_id      Int\n  produto_id     Int\n  preco          Float?\n  preco_desconto Float?\n  observacoes    String?   @db.VarChar(255)\n  status         String    @default(\"pendente\") @db.VarChar(15)\n  createdAt      DateTime? @default(now())\n  updatedAt      DateTime? @updatedAt\n  missoes        missoes   @relation(fields: [missao_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: \"missao_produto_fk1\")\n  produtos       produtos  @relation(fields: [produto_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"missao_produto_fk2\")\n}\n\nmodel missoes {\n  id             Int              @id @default(autoincrement())\n  concorrente_id Int\n  status         String           @default(\"pendente\") @db.VarChar(15)\n  usuario_id     Int?\n  createdAt      DateTime?        @default(now())\n  updatedAt      DateTime?        @updatedAt\n  missao_produto missao_produto[]\n  concorrentes   concorrentes     @relation(fields: [concorrente_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"missoes_fk1\")\n  usuarios       usuarios?        @relation(fields: [usuario_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"missoes_fk3\")\n}\n\nmodel produtos {\n  id             Int              @id @default(autoincrement())\n  nome           String           @db.VarChar(255)\n  preco          Float\n  codigo         String?          @db.VarChar(30)\n  foto           String?          @db.VarChar(255)\n  createdAt      DateTime?        @default(now())\n  updatedAt      DateTime?        @updatedAt\n  missao_produto missao_produto[]\n}\n\nmodel usuarios {\n  id        Int       @id @default(autoincrement())\n  nome      String    @db.VarChar(50)\n  email     String    @db.VarChar(50)\n  senha     String    @db.VarChar(255)\n  foto      String?   @db.VarChar(255)\n  nivel_id  Int?\n  createdAt DateTime? @default(now())\n  updatedAt DateTime? @updatedAt\n  missoes   missoes[]\n  nivel     niveis?   @relation(fields: [nivel_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: \"niveis_fk4\")\n}\n\nmodel niveis {\n  id        Int        @id @default(autoincrement())\n  nome      String     @db.VarChar(50)\n  createdAt DateTime?  @default(now())\n  updatedAt DateTime?  @updatedAt\n  usuario   usuarios[]\n}\n",
+  "inlineSchemaHash": "77737c1dc04ae6dbf4fab8495848647e5926faae12d7c30574436ba3f6b2925a",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"concorrentes\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endereco\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"missoes\",\"relationName\":\"concorrentesTomissoes\"}],\"dbName\":null},\"missao_produto\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missao_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"produto_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"preco\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"observacoes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"missoes\",\"relationName\":\"missao_produtoTomissoes\"},{\"name\":\"produtos\",\"kind\":\"object\",\"type\":\"produtos\",\"relationName\":\"missao_produtoToprodutos\"}],\"dbName\":null},\"missoes\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"concorrente_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"usuario_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missao_produto\",\"kind\":\"object\",\"type\":\"missao_produto\",\"relationName\":\"missao_produtoTomissoes\"},{\"name\":\"concorrentes\",\"kind\":\"object\",\"type\":\"concorrentes\",\"relationName\":\"concorrentesTomissoes\"},{\"name\":\"usuarios\",\"kind\":\"object\",\"type\":\"usuarios\",\"relationName\":\"missoesTousuarios\"}],\"dbName\":null},\"produtos\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"preco\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"codigo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missao_produto\",\"kind\":\"object\",\"type\":\"missao_produto\",\"relationName\":\"missao_produtoToprodutos\"}],\"dbName\":null},\"usuarios\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senha\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"missoes\",\"relationName\":\"missoesTousuarios\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"concorrentes\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"tipo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"endereco\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"missoes\",\"relationName\":\"concorrentesTomissoes\"}],\"dbName\":null},\"missao_produto\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"missao_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"produto_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"preco\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"preco_desconto\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"observacoes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"missoes\",\"relationName\":\"missao_produtoTomissoes\"},{\"name\":\"produtos\",\"kind\":\"object\",\"type\":\"produtos\",\"relationName\":\"missao_produtoToprodutos\"}],\"dbName\":null},\"missoes\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"concorrente_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"usuario_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missao_produto\",\"kind\":\"object\",\"type\":\"missao_produto\",\"relationName\":\"missao_produtoTomissoes\"},{\"name\":\"concorrentes\",\"kind\":\"object\",\"type\":\"concorrentes\",\"relationName\":\"concorrentesTomissoes\"},{\"name\":\"usuarios\",\"kind\":\"object\",\"type\":\"usuarios\",\"relationName\":\"missoesTousuarios\"}],\"dbName\":null},\"produtos\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"preco\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"codigo\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missao_produto\",\"kind\":\"object\",\"type\":\"missao_produto\",\"relationName\":\"missao_produtoToprodutos\"}],\"dbName\":null},\"usuarios\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"senha\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"foto\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nivel_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"missoes\",\"kind\":\"object\",\"type\":\"missoes\",\"relationName\":\"missoesTousuarios\"},{\"name\":\"nivel\",\"kind\":\"object\",\"type\":\"niveis\",\"relationName\":\"niveisTousuarios\"}],\"dbName\":null},\"niveis\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"usuario\",\"kind\":\"object\",\"type\":\"usuarios\",\"relationName\":\"niveisTousuarios\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
