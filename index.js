@@ -4,7 +4,7 @@ import concorrenteRoutes from "./src/routes/concorrenteRoutes.js"
 import usuariosRoutes from "./src/routes/usuariosRoutes.js"
 import produtoRoutes from "./src/routes/produtosRouter.js"
 import missoesRoutes from "./src/routes/missoesRouter.js"
-import { login } from "./src/controllers/usuarioContrller.js";
+import { login } from "./src/controllers/usuarioController.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './src/docs/swagger_output.json' with { type: 'json' };
 
