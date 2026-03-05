@@ -72,7 +72,7 @@ async function criar(req, res) {
             });
         }
 
-        const { Produto_id } = req.body;
+        const { concorrente_id } = req.body;
         const caminho = req.file.path;
 
         const workbook = XLSX.readFile(caminho);
@@ -131,7 +131,7 @@ async function criar(req, res) {
             // 2️⃣ Cria a missão APÓS produtos existirem
             await tx.missoes.create({
                 data: {
-                    Produto_id: Number(Produto_id),
+                    concorrente_id: Number(concorrente_id),
                     missao_produto: {
                         create: produtosCriados.map(p => ({
                             produto_id: p.id
