@@ -72,7 +72,7 @@ async function criar(req, res) {
             });
         }
 
-        const { concorrente_id } = req.body;
+        const { concorrente_id, usuario_id } = req.body;
         const caminho = req.file.path;
 
         const workbook = XLSX.readFile(caminho);
@@ -132,6 +132,7 @@ async function criar(req, res) {
             await tx.missoes.create({
                 data: {
                     concorrente_id: Number(concorrente_id),
+                    usuario_id: Number(usuario_id),
                     missao_produto: {
                         create: produtosCriados.map(p => ({
                             produto_id: p.id
